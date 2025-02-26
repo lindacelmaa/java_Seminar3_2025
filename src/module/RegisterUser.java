@@ -3,7 +3,7 @@ package module;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public abstract class RegisterUser extends GuestUser { //netiks veidoti objekti, bet izmantos kaa superklasi
+public abstract class RegisterUser extends GuestUser implements IPostCreate{ //netiks veidoti objekti, bet izmantos kaa superklasi
 	
 	private String username;
 	private String nameAndSurname;
