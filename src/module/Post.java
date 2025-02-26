@@ -1,17 +1,19 @@
 package module;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Post {
 	private String msg;
-	private Date date;
-	private int countOfLikes;
+	private LocalDate date;
+	private int countOfLikes = 0;
+
 	
 	public String getMsg() {
 		return msg;
 	}
 	
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 	
@@ -20,20 +22,37 @@ public class Post {
 	}
 	
 	public void setMsg(String inputMsg) {
-		if (inputMsg != null) {
+		if (inputMsg != null && inputMsg.matches("[A-Za-b .0-9!@#$%^&*(),]{3,150}")) {
 			msg = inputMsg;
 		}else {
 			msg = "Hello world!";
 		}
 	}
 	
-	public void setDate(Date inputDate) {
-		if (inputDate != null && !inputDate);
+	public void setDate(LocalDate inputDate) {
+		if (inputDate != null && !inputDate.isBefore(LocalDate.now())) {
+			date = inputDate;
+		}
+		else {
+			date = LocalDate.now();
+		}
 	}
 	
-	public void setCountOfLikes(int countOfLikes) {
-		this.countOfLikes = countOfLikes;
+	public void setCountOfLikes() {
+		countOfLikes++;
 	}
 	
+	public Post() {
+		setMsg("Hello world");
+		setDate(LocalDate.now());
+	}
 	
+	public Post(String inputMsg, LocalDate date) {
+		setMsg(inputMsg);
+		setDate(date);
+	}
+	
+	public String toString() {
+		return msg + " (" + date + ") " + countOfLikes; 
+	}
 }
