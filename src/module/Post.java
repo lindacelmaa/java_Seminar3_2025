@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 public class Post {
 	private String msg;
-	private LocalDate date;
+	private LocalDateTime date;
 	private int countOfLikes = 0;
 
 	
@@ -13,7 +13,7 @@ public class Post {
 		return msg;
 	}
 	
-	public LocalDate getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 	
@@ -29,13 +29,8 @@ public class Post {
 		}
 	}
 	
-	public void setDate(LocalDate inputDate) {
-		if (inputDate != null && !inputDate.isBefore(LocalDate.now())) {
-			date = inputDate;
-		}
-		else {
-			date = LocalDate.now();
-		}
+	public void setDate() {
+		date= LocalDateTime.now();
 	}
 	
 	public void setCountOfLikes() {
@@ -44,12 +39,12 @@ public class Post {
 	
 	public Post() {
 		setMsg("Hello world");
-		setDate(LocalDate.now());
+		setDate();
 	}
 	
-	public Post(String inputMsg, LocalDate date) {
+	public Post(String inputMsg) {
 		setMsg(inputMsg);
-		setDate(date);
+		setDate();
 	}
 	
 	public String toString() {

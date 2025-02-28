@@ -71,7 +71,21 @@ public class PrivateUser extends RegisterUser {
 
 
 	@Override
-	public void createPost(PostType postType, String... params) {
-		
+	public void createPost(PostType postType, String... params) throws Exception{
+		if(postType != null && params != null) {
+			if(params.length != 0) {
+				Post newPost = new Post(params[0]);
+				if(postType.equals(PostType.privatePost)) {
+					privatePosts.add(newPost);
+				}else if(postType.equals(PostType.publicPost)) {
+					publicPosts.add(newPost);
+				}
+			}
+			else {
+				throw new Exception("Message text is necessary");
+			}
+		}else {
+			throw new NullPointerException("Params should be with real reference");
+		}
 	}
 }
