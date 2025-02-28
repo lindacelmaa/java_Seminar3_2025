@@ -62,7 +62,7 @@ public class PrivateUser extends RegisterUser {
 	public PrivateUser(String inputUsername, String inputPassword, String name, String surname) {
 		super(inputUsername, inputPassword);
 		setName(name);
-		setName(surname);
+		setSurname(surname);
 	}
 
 	public String toString() {

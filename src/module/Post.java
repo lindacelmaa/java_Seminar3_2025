@@ -22,7 +22,7 @@ public class Post {
 	}
 	
 	public void setMsg(String inputMsg) {
-		if (inputMsg != null && inputMsg.matches("[A-Za-b .0-9!@#$%^&*(),]{3,150}")) {
+		if (inputMsg != null && inputMsg.matches("[A-Za-z .0-9!@#$%^&*(),]{3,150}")) {
 			msg = inputMsg;
 		}else {
 			msg = "Hello world!";

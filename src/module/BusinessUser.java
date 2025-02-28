@@ -30,13 +30,13 @@ public class BusinessUser extends RegisterUser {
 		setBusinessName("Business Name");
 	}
 	
-	public BusinessUser(String inputPassword, String inputUsername, String inputBusinessName) {
-		super(inputPassword, inputUsername);
+	public BusinessUser(String inputUsername, String inputPassword, String inputBusinessName) {
+		super(inputUsername, inputPassword);
 		setBusinessName(inputBusinessName);
 	}
 	
 	public String toString() {
-		return super.toString() + listOfPages;
+		return super.toString() + ": " + businessName+ ", " + listOfPages;
 	}
 
 	@Override

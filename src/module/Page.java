@@ -52,7 +52,7 @@ public class Page {
 	
 	@Override
 	public String toString() {
-		return "Title: " + title + "; Description: " + description;
+		return "Title: " + title + "; Description: " + description + "->" + postsInPage;
 	}
 	
 }

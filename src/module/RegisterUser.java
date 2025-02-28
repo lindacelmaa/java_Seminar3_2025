@@ -3,6 +3,8 @@ package module;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import service.MainService;
+
 public abstract class RegisterUser extends GuestUser implements IPostCreate{ //netiks veidoti objekti, bet izmantos kaa superklasi
 	
 	private String username;
@@ -27,10 +29,11 @@ public abstract class RegisterUser extends GuestUser implements IPostCreate{ //n
 	
 	
 	public void setPassword(String inputPassword) {
-		if(inputPassword != null && inputPassword.matches("[A-Za-z0-9!@#$%^&*()_]{8,15}")) {
+		if(inputPassword != null && inputPassword.matches("[A-Za-z ]{2,15}")) {
 			try {
 				MessageDigest md = MessageDigest.getInstance("MD5");
 				md.update(inputPassword.getBytes());
+				password = new String(md.digest());
 			}catch (NoSuchAlgorithmException e) {
 				e.printStackTrace();
 			}
@@ -54,5 +57,38 @@ public abstract class RegisterUser extends GuestUser implements IPostCreate{ //n
 	
 	public String toString() {
 		return super.toString() + ": " + username + ", " + password;
+	}
+	
+	public void followPage(String inputTitle) throws NullPointerException{
+		if (inputTitle != null) {
+			for(GuestUser tempU: MainService.getAllUsers()) {
+				if(tempU instanceof BusinessUser) {
+					BusinessUser tempBU = (BusinessUser) tempU;
+					for(Page tempP: tempBU.getListOfPages()) {
+						if(tempP.getTitle().equals(inputTitle)) {
+							tempP.getAllFollowersUsers().add(this);
+						}
+					}
+				}
+			}
+		}else {
+			throw new NullPointerException("Params should be with real reference");
+		}
+	}
+	
+	public void followPrivateUser(String inputUsername) throws NullPointerException{
+		if (inputUsername != null) {
+			for(GuestUser tempU: MainService.getAllUsers()) {
+				if(tempU instanceof PrivateUser) {
+					PrivateUser tempPU = (PrivateUser) tempU;
+					if(tempPU.getUsername().equals(inputUsername)) {
+						tempPU.getAllFollowers().add(this);
+						
+					}
+				}
+			}
+		}else {
+			throw new NullPointerException("Params should be with real reference");
+		}
 	}
 }
