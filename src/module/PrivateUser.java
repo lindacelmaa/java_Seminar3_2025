@@ -66,7 +66,7 @@ public class PrivateUser extends RegisterUser {
 	}
 
 	public String toString() {
-		return super.toString() + ": " + name + " " + surname;
+		return super.toString() + ": " + name + " " + surname + "; all followers: " + allFollowers;
 	}
 
 

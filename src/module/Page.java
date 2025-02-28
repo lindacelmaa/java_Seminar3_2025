@@ -50,6 +50,7 @@ public class Page {
 		setDescription(description);
 	}
 	
+	@Override
 	public String toString() {
 		return "Title: " + title + "; Description: " + description;
 	}
