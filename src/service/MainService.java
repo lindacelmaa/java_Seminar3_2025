@@ -1,5 +1,6 @@
 package service;
 
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -8,6 +9,7 @@ import module.GuestUser;
 import module.Page;
 import module.PostType;
 import module.PrivateUser;
+import module.RegisterUser;
 
 public class MainService {
 	
@@ -27,28 +29,31 @@ public class MainService {
 		}
 		
 		try {
-			u3.createPost(PostType.publicPost, "Man patik JAVA!");
-			u3.createPost(PostType.privatePost, "Man gribas majas!!");
+			if(u3.login("lindacelma", "Aaaaa")) {
+				u3.createPost(PostType.publicPost, "Man patik JAVA!");
+				u3.createPost(PostType.privatePost, "Man gribas majas!!");
 			
-			System.out.println(u3.getSurname() + " privatas zi'nas: " + u3.getPrivatePosts());
-			System.out.println(u3.getSurname() + " publiskas zi'nas: " + u3.getPublicPosts());
+				System.out.println(u3.getSurname() + " privatas zi'nas: " + u3.getPrivatePosts());
+				System.out.println(u3.getSurname() + " publiskas zi'nas: " + u3.getPublicPosts());
 			
-			u4.createPage("Ziedi Ventspili", "Mana lapa par ziediem Ventspili");
-			u4.createPage("Ziedi Ugaalee", "Mana lapa par ziediem Ugaalee");
+				u4.createPage("Ziedi Ventspili", "Mana lapa par ziediem Ventspili");
+				u4.createPage("Ziedi Ugaalee", "Mana lapa par ziediem Ugaalee");
+				
+				u4.createPost(PostType.publicPost, "20% atlaide visiem ziediem", "Ziedi Ventspili");
+				u4.createPost(PostType.publicPost, "Cau rau", "Ziedi Ventspili", "Ziedi Ugaalee");
 			
-			u4.createPost(PostType.publicPost, "20% atlaide visiem ziediem", "Ziedi Ventspili");
-			u4.createPost(PostType.publicPost, "Cau rau", "Ziedi Ventspili", "Ziedi Ugaalee");
-			
-			for(Page temp4: u4.getListOfPages()) {
+				for(Page temp4: u4.getListOfPages()) {
 				System.out.println(temp4);
+				}
+			
+				u3.followPage("Ziedi Ventspili");
+				System.out.println(u4.getListOfPages().get(0).getAllFollowersUsers());
+			
+				u4.followPrivateUser("lindacelma");
+				System.out.println(u3.getSurname() + " sekotaji ir -> " + u3.getAllFollowers());
+			
+				System.out.println("Mekleju (linda) -> " + u4.findUser("Linda"));
 			}
-			
-			u3.followPage("Ziedi Ventspili");
-			System.out.println(u4.getListOfPages().get(0).getAllFollowersUsers());
-			
-			u4.followPrivateUser("lindacelma");
-			System.out.println(u3.getSurname() + " sekotaji ir -> " + u3.getAllFollowers());
-			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,7 +63,8 @@ public class MainService {
 	public static ArrayList<GuestUser> getAllUsers() {
 		return allUsers;
 	}
-
+	
+	
 	
 	
 	
